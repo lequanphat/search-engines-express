@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 const algoliaClient = require("../config/algolia-search-client");
 
 const createDocument = async (indexName, { name, email }) => {
-  const record = { id: uuidv4(), name, email };
+  const record = { objectID: uuidv4(), name, email };
 
   const { taskID } = await algoliaClient.saveObject({
     indexName,
