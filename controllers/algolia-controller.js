@@ -1,6 +1,7 @@
+const { InternalServerError } = require("../core/errors");
 const algoliaService = require("../services/algolia-service");
 
-const createDocument = async (req, res) => {
+const createDocument = async (req, res, next) => {
   const { index } = req.params;
   const { name, email } = req.body;
 
@@ -11,18 +12,18 @@ const createDocument = async (req, res) => {
     });
     res.json(results);
   } catch (err) {
-    res.status(500).send({ error: "Unable to add document" });
+    next(new InternalServerError("Unable to create document"));
   }
 };
 
-const searchDocuments = async (req, res) => {
+const searchDocuments = async (req, res, next) => {
   const { index } = req.params;
   const { query } = req.query;
   try {
     const results = await algoliaService.searchDocuments(index, query);
     res.json(results);
   } catch (err) {
-    res.status(500).send({ error: "Unable to search documents" });
+    next(new InternalServerError("Unable to search documents"));
   }
 };
 

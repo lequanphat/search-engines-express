@@ -3,6 +3,7 @@ dotenv.config();
 
 const CONFIG = {
   SERVER_PORT: process.env.SERVER_PORT,
+  NODE_ENV: process.env.NODE_ENV,
   ELASTICSEARCH_NODE_URL: process.env.ELASTICSEARCH_NODE_URL,
   ELASTICSEARCH_API_KEY: process.env.ELASTICSEARCH_API_KEY,
   ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,

@@ -1,15 +1,16 @@
+const { InternalServerError } = require("../core/errors");
 const searchEngineService = require("../services/elasticsearch-service");
 
-const checkESClientConnection = async (req, res) => {
+const checkESClientConnection = async (req, res, next) => {
   try {
     const health = await searchEngineService.checkESClientConnection();
     res.json(health);
   } catch (err) {
-    res.status(500).send({ error: "Unable to connect to Elasticsearch" });
+    next(new InternalServerError("Unable to connect to Elasticsearch"));
   }
 };
 
-const createDocument = async (req, res) => {
+const createDocument = async (req, res, next) => {
   const { index } = req.params;
   const { name, description, author, pages } = req.body;
 
@@ -22,11 +23,11 @@ const createDocument = async (req, res) => {
     });
     res.json(result);
   } catch (err) {
-    res.status(500).send({ error: "Unable to add document" });
+    next(new InternalServerError("Unable to add document"));
   }
 };
 
-const searchDocuments = async (req, res) => {
+const searchDocuments = async (req, res, next) => {
   const { index } = req.params;
   const { query } = req.query;
   try {
@@ -36,7 +37,7 @@ const searchDocuments = async (req, res) => {
     );
     res.json(searchResult);
   } catch (err) {
-    res.status(500).send({ error: "Unable to search documents" });
+    next(new InternalServerError("Unable to search documents"));
   }
 };
 
