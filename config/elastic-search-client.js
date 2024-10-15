@@ -1,5 +1,5 @@
 const { Client } = require("@elastic/elasticsearch");
-const { CONFIG } = require("./env");
+const CONFIG = require("./env");
 
 const esClient = new Client({
   node: CONFIG.ELASTICSEARCH_NODE_URL,

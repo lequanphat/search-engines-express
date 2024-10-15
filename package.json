@@ -8,6 +8,6 @@
     "uuid": "^10.0.0"
   },
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node app.js"
   }
 }

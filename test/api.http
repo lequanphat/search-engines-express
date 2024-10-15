@@ -2,19 +2,19 @@ GET http://localhost:3000/
 
 ### Check Elasticsearch connector
 
-GET http://localhost:3000/elasticsearch
+GET http://localhost:3000/api/elasticsearch
 
 ### Create document
 
-POST http://localhost:3000/elasticsearch/blogs
+POST http://localhost:3000/api/elasticsearch/blogs
 Content-Type: application/json
 
 {
-   "name": "The first blog",
+   "name": "The second blog",
     "description": "Nothing",
     "author": "Quan Phat",
     "pages": 99
 }
 
 ### Search
-GET http://localhost:3000/elasticsearch/blogs?query=first
+GET http://localhost:3000/api/elasticsearch/blogs?query=second

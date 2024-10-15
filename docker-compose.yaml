@@ -1,28 +1,39 @@
-version: '7'
+version: "8"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2 # specify the Elasticsearch version
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
     container_name: elasticsearch
     environment:
       - discovery.type=single-node
-      - ELASTIC_PASSWORD=24112003
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ELASTIC_PASSWORD=123123
       - xpack.security.enabled=true
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - es_data:/usr/share/elasticsearch/data
+      - xpack.security.authc.api_key.enabled=true
     ports:
-      - 9200:9200
-      - 9300:9300
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
     networks:
-      - esnet
+      - elastic
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.15.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_SERVICE_TOKEN=AAEAAWVsYXN0aWMva2liYW5hL2RlZmF1bHQ6SXdrb3MxaGlSUHFZbFFfNlhMRUk2dw
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
 
 volumes:
-  es_data:
+  esdata:
     driver: local
 
 networks:
-  esnet:
+  elastic:
     driver: bridge
