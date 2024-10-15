@@ -15,3 +15,5 @@ app.use(errorHandler);
 app.listen(CONFIG.SERVER_PORT, () => {
   console.log(`Server is running on port ${CONFIG.SERVER_PORT}`);
 });
+
+module.exports = app;
