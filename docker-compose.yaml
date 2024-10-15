@@ -26,6 +26,17 @@ services:
       - elasticsearch
     networks:
       - elastic
+    
+  express-app:
+    build:
+      context: .  
+    container_name: express-app
+    ports:
+      - "3000:3000"
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200 
+    networks:
+      - elastic
 
 volumes:
   esdata:

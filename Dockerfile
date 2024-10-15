@@ -1,11 +1,13 @@
-# Use the official Elasticsearch image as the base image
-FROM docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+FROM node:18
 
-# Optionally add plugins
-# RUN elasticsearch-plugin install <plugin_name>
+WORKDIR /usr/src/app
 
-# Set environment variables for Elasticsearch
-ENV discovery.type=single-node
+COPY package*.json ./
 
-# Expose necessary ports
-EXPOSE 9200 9300
+RUN yarn
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["yarn", "dev"]
