@@ -8,6 +8,4 @@ const esClient = new Client({
   },
 });
 
-module.exports = {
-  esClient,
-};
+module.exports = esClient;

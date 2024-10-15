@@ -1,4 +1,4 @@
-const searchEngineService = require("../services/search-engine-service");
+const searchEngineService = require("../services/elasticsearch-service");
 
 const checkESClientConnection = async (req, res) => {
   try {

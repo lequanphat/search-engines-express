@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
-const { esClient } = require("../config/elastic-search-client");
+const esClient = require("../config/elastic-search-client");
 
 const checkESClientConnection = async () => {
   const health = await esClient.cluster.health();

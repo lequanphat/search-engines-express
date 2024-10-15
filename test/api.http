@@ -1,5 +1,7 @@
 GET http://localhost:3000/
 
+
+### Elasticsearch
 ### Check Elasticsearch connector
 
 GET http://localhost:3000/api/elasticsearch
@@ -10,7 +12,7 @@ POST http://localhost:3000/api/elasticsearch/blogs
 Content-Type: application/json
 
 {
-   "name": "The second blog",
+    "name": "The second blog",
     "description": "Nothing",
     "author": "Quan Phat",
     "pages": 99
@@ -18,3 +20,16 @@ Content-Type: application/json
 
 ### Search
 GET http://localhost:3000/api/elasticsearch/blogs?query=second
+
+### Algolia
+### Search
+GET http://localhost:3000/api/algolia/users?query=quanphat
+
+### Create document
+POST http://localhost:3000/api/algolia/users
+Content-Type: application/json
+
+{
+    "name": "Quan Phat",
+    "email": "lequanphat3579@gmail.com"
+}
